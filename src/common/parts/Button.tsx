@@ -14,23 +14,37 @@ interface ButtonProps {
   "aria-label"?: string;
 }
 
+// ボタンの色の型安全な定義
+const colorMap = {
+  primary: BUTTON_COLORS.primary,
+  secondary: BUTTON_COLORS.secondary,
+  danger: BUTTON_COLORS.danger,
+} as const;
+
+// ボタンのサイズの型安全な定義
+const sizeMap = {
+  small: BUTTON_SIZES.small,
+  medium: BUTTON_SIZES.medium,
+  large: BUTTON_SIZES.large,
+} as const;
+
 const buttonStyles = (
-  variant: ButtonProps["variant"],
-  size: ButtonProps["size"],
+  variant: keyof typeof colorMap,
+  size: keyof typeof sizeMap,
   fullWidth: boolean
 ) => css`
-  background: ${BUTTON_COLORS[variant || "primary"].normal};
+  background: ${colorMap[variant].normal};
   color: white;
   border: none;
-  padding: ${BUTTON_SIZES[size || "medium"].padding};
+  padding: ${sizeMap[size].padding};
   border-radius: 4px;
   cursor: pointer;
-  font-size: ${BUTTON_SIZES[size || "medium"].fontSize};
+  font-size: ${sizeMap[size].fontSize};
   transition: background-color 0.2s ease;
   width: ${fullWidth ? "100%" : "auto"};
 
   &:hover {
-    background: ${BUTTON_COLORS[variant || "primary"].hover};
+    background: ${colorMap[variant].hover};
   }
 
   &:disabled {

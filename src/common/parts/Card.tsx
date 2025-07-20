@@ -11,17 +11,24 @@ interface CardProps {
   borderRadius?: string;
 }
 
+// パディングの型安全な定義
+const paddingMap = {
+  small: CARD_PADDINGS.small,
+  medium: CARD_PADDINGS.medium,
+  large: CARD_PADDINGS.large
+} as const;
+
 const cardStyles = (
-  padding: CardProps['padding'],
+  padding: keyof typeof paddingMap,
   shadow: boolean,
   background: string,
   borderRadius: string
 ) => css`
   background: ${background};
   border-radius: ${borderRadius};
-  padding: ${CARD_PADDINGS[padding || 'medium']};
+  padding: ${paddingMap[padding]};
   ${shadow &&
-  `
+  css`
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   `}
 `;
