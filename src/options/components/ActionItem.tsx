@@ -58,12 +58,6 @@ export const ActionItem: React.FC<ActionItemProps> = ({
   onDelete,
   onMove,
 }) => {
-  const escapeHtml = (text: string): string => {
-    const div = document.createElement("div");
-    div.textContent = text;
-    return div.innerHTML;
-  };
-
   return (
     <div css={actionItemStyle}>
       <div css={actionControlsStyle}>
@@ -81,8 +75,8 @@ export const ActionItem: React.FC<ActionItemProps> = ({
           削除
         </Button>
       </div>
-      <div css={actionNameStyle}>{escapeHtml(action.name)}</div>
-      <div css={actionUrlStyle}>{escapeHtml(action.urlTemplate)}</div>
+      <div css={actionNameStyle}>{action.name}</div>
+      <div css={actionUrlStyle}>{action.urlTemplate}</div>
     </div>
   );
 };
