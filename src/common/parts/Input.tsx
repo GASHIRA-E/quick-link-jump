@@ -13,6 +13,9 @@ interface InputProps {
   label?: string;
   type?: "text" | "email" | "password";
   disabled?: boolean;
+  autoComplete?: string;
+  maxLength?: number;
+  pattern?: string;
 }
 
 const inputContainerStyle = css`
@@ -25,6 +28,11 @@ const labelStyle = css`
   font-weight: ${FONTS.weights.semibold};
   color: ${COLORS.gray[700]};
   font-size: ${FONTS.sizes.sm};
+`;
+
+const requiredStyle = css`
+  color: ${COLORS.danger};
+  margin-left: ${SPACING.xs};
 `;
 
 const inputStyle = css`
@@ -45,6 +53,10 @@ const inputStyle = css`
     background-color: ${COLORS.gray[100]};
     cursor: not-allowed;
   }
+
+  &[aria-invalid="true"] {
+    border-color: ${COLORS.danger};
+  }
 `;
 
 const errorStyle = css`
@@ -53,36 +65,61 @@ const errorStyle = css`
   margin-top: ${SPACING.xs};
 `;
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(({
-  id,
-  value,
-  onChange,
-  placeholder,
-  required = false,
-  error,
-  label,
-  type = "text",
-  disabled = false,
-}, ref) => {
-  return (
-    <div css={inputContainerStyle}>
-      {label && (
-        <label htmlFor={id} css={labelStyle}>
-          {label}
-        </label>
-      )}
-      <input
-        ref={ref}
-        id={id}
-        type={type}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        placeholder={placeholder}
-        required={required}
-        disabled={disabled}
-        css={inputStyle}
-      />
-      {error && <div css={errorStyle}>{error}</div>}
-    </div>
-  );
-});
+export const Input = forwardRef<
+  HTMLInputElement,
+  InputProps & React.InputHTMLAttributes<HTMLInputElement>
+>(
+  (
+    {
+      id,
+      value,
+      onChange,
+      placeholder,
+      required = false,
+      error,
+      label,
+      type = "text",
+      disabled = false,
+      autoComplete,
+      maxLength,
+      pattern,
+      ...rest
+    },
+    ref
+  ) => {
+    const errorId = error ? `${id}-error` : undefined;
+
+    return (
+      <div css={inputContainerStyle}>
+        {label && (
+          <label htmlFor={id} css={labelStyle}>
+            {label}
+            {required && <span css={requiredStyle}>*</span>}
+          </label>
+        )}
+        <input
+          ref={ref}
+          id={id}
+          type={type}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          placeholder={placeholder}
+          required={required}
+          disabled={disabled}
+          autoComplete={autoComplete}
+          maxLength={maxLength}
+          pattern={pattern}
+          aria-describedby={errorId}
+          aria-invalid={!!error}
+          {...rest}
+          css={inputStyle}
+        />
+        {error && (
+          <div id={errorId} css={errorStyle} role="alert">
+            {error}
+          </div>
+        )}
+      </div>
+    );
+  }
+);
