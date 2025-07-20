@@ -134,13 +134,7 @@ const Options: React.FC = () => {
     }
   };
 
-  const saveActions = async (): Promise<void> => {
-    try {
-      await chrome.storage.sync.set({ actions });
-    } catch (error) {
-      console.error("Failed to save actions:", error);
-    }
-  };
+
 
   const validateAction = (name: string, urlTemplate: string): boolean => {
     const newErrors: { [key: string]: string } = {};
