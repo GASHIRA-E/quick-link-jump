@@ -97,8 +97,17 @@ export const Options: React.FC = () => {
       return;
     }
 
+    // より安全なID生成
+    const generateId = (): string => {
+      if (typeof crypto !== "undefined" && crypto.randomUUID) {
+        return crypto.randomUUID();
+      }
+      // フォールバック: タイムスタンプ + ランダム文字列
+      return `action_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    };
+
     const newAction: Action = {
-      id: Date.now().toString(),
+      id: generateId(),
       name: actionName,
       urlTemplate: urlTemplate,
     };
