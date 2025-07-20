@@ -17,7 +17,7 @@ interface ActionFormProps {
 const inputGroupStyle = css`
   display: flex;
   gap: 10px;
-  align-items: flex-start;
+  align-items: flex-end;
 `;
 
 const inputGroupInputStyle = css`
