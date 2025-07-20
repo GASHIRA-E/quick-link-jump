@@ -11,21 +11,26 @@ interface ButtonProps {
   type?: "button" | "submit";
   disabled?: boolean;
   fullWidth?: boolean;
+  "aria-label"?: string;
 }
 
-const buttonStyles = (variant: ButtonProps['variant'], size: ButtonProps['size'], fullWidth: boolean) => css`
-  background: ${BUTTON_COLORS[variant || 'primary'].normal};
+const buttonStyles = (
+  variant: ButtonProps["variant"],
+  size: ButtonProps["size"],
+  fullWidth: boolean
+) => css`
+  background: ${BUTTON_COLORS[variant || "primary"].normal};
   color: white;
   border: none;
-  padding: ${BUTTON_SIZES[size || 'medium'].padding};
+  padding: ${BUTTON_SIZES[size || "medium"].padding};
   border-radius: 4px;
   cursor: pointer;
-  font-size: ${BUTTON_SIZES[size || 'medium'].fontSize};
+  font-size: ${BUTTON_SIZES[size || "medium"].fontSize};
   transition: background-color 0.2s ease;
   width: ${fullWidth ? "100%" : "auto"};
 
   &:hover {
-    background: ${BUTTON_COLORS[variant || 'primary'].hover};
+    background: ${BUTTON_COLORS[variant || "primary"].hover};
   }
 
   &:disabled {
@@ -34,7 +39,9 @@ const buttonStyles = (variant: ButtonProps['variant'], size: ButtonProps['size']
   }
 `;
 
-export const Button: React.FC<ButtonProps> = ({
+export const Button: React.FC<
+  ButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>
+> = ({
   variant = "primary",
   size = "medium",
   children,
@@ -42,6 +49,8 @@ export const Button: React.FC<ButtonProps> = ({
   type = "button",
   disabled = false,
   fullWidth = false,
+  "aria-label": ariaLabel,
+  ...rest
 }) => {
   return (
     <button
@@ -49,6 +58,8 @@ export const Button: React.FC<ButtonProps> = ({
       onClick={onClick}
       type={type}
       disabled={disabled}
+      aria-label={ariaLabel}
+      {...rest}
     >
       {children}
     </button>
