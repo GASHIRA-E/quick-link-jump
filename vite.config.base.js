@@ -1,12 +1,12 @@
 import { resolve } from "node:path";
-// import react from "@vitejs/plugin-react";
+import react from "@vitejs/plugin-react";
 
 export const generateViteConfig = (inputKey, inputPath) => ({
-  // plugins: [
-  //   react({
-  //     jsxImportSource: "@emotion/react",
-  //   }),
-  // ],
+  plugins: [
+    react({
+      jsxImportSource: "@emotion/react",
+    }),
+  ],
   resolve: {
     alias: {
       "@": resolve(__dirname, "src"),
