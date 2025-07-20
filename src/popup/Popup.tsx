@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React from "react";
 import { css } from "@emotion/react";
+import Button from "../common/parts/Button";
 
 const containerStyle = css`
   width: 300px;
@@ -15,23 +16,6 @@ const titleStyle = css`
   margin: 0 0 20px 0;
   font-size: 18px;
   text-align: center;
-`;
-
-const buttonStyle = (variant: "primary" | "secondary" = "primary") => css`
-  background: ${variant === "secondary" ? "#6c757d" : "#007bff"};
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
-  width: 100%;
-  margin-bottom: 10px;
-  transition: background-color 0.2s;
-
-  &:hover {
-    background: ${variant === "secondary" ? "#545b62" : "#0056b3"};
-  }
 `;
 
 const infoStyle = css`
@@ -51,9 +35,14 @@ const Popup: React.FC = () => {
     <div css={containerStyle}>
       <h1 css={titleStyle}>Quick Link Jump</h1>
 
-      <button css={buttonStyle()} onClick={handleOpenOptions}>
+      <Button 
+        variant="primary" 
+        size="large" 
+        fullWidth 
+        onClick={handleOpenOptions}
+      >
         ⚙️ 設定を開く
-      </button>
+      </Button>
 
       <div css={infoStyle}>
         <strong>使い方:</strong>

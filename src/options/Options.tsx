@@ -1,6 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import React, { useState, useEffect } from "react";
 import { css } from "@emotion/react";
+import Button from "../common/parts/Button";
+import Input from "../common/parts/Input";
+import Card from "../common/parts/Card";
 
 interface Action {
   id: string;
@@ -17,37 +20,10 @@ const containerStyle = css`
   min-height: 100vh;
 `;
 
-const mainContainerStyle = css`
-  background: white;
-  border-radius: 8px;
-  padding: 30px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-`;
-
 const titleStyle = css`
   color: #333;
   margin-bottom: 30px;
   text-align: center;
-`;
-
-const formGroupStyle = css`
-  margin-bottom: 20px;
-`;
-
-const labelStyle = css`
-  display: block;
-  margin-bottom: 5px;
-  font-weight: 600;
-  color: #555;
-`;
-
-const inputStyle = css`
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 14px;
-  box-sizing: border-box;
 `;
 
 const inputGroupStyle = css`
@@ -58,48 +34,6 @@ const inputGroupStyle = css`
 
 const inputGroupInputStyle = css`
   flex: 1;
-`;
-
-const buttonStyle = (
-  variant: "primary" | "secondary" | "danger" = "primary"
-) => css`
-  background: ${variant === "secondary"
-    ? "#6c757d"
-    : variant === "danger"
-    ? "#dc3545"
-    : "#007bff"};
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
-  margin-right: 10px;
-  transition: background-color 0.2s ease;
-
-  &:hover {
-    background: ${variant === "secondary"
-      ? "#5a6268"
-      : variant === "danger"
-      ? "#c82333"
-      : "#0056b3"};
-  }
-`;
-
-const smallButtonStyle = css`
-  background: #6c757d;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 12px;
-  white-space: nowrap;
-  transition: background-color 0.2s ease;
-
-  &:hover {
-    background: #5a6268;
-  }
 `;
 
 const exampleStyle = css`
@@ -316,7 +250,7 @@ const Options: React.FC = () => {
 
   return (
     <div css={containerStyle}>
-      <div css={mainContainerStyle}>
+      <Card>
         <h1 css={titleStyle}>Quick Link Jump 設定</h1>
 
         <div css={exampleStyle}>
@@ -347,50 +281,36 @@ const Options: React.FC = () => {
         </div>
 
         <form onSubmit={handleSubmit}>
-          <div css={formGroupStyle}>
-            <label htmlFor="actionName" css={labelStyle}>
-              アクション名 *
-            </label>
-            <input
-              type="text"
-              id="actionName"
-              value={actionName}
-              onChange={(e) => setActionName(e.target.value)}
-              placeholder="例: Jira Issue"
-              required
-              css={inputStyle}
-            />
-            {errors.name && <div css={errorStyle}>{errors.name}</div>}
-          </div>
+          <Input
+            id="actionName"
+            value={actionName}
+            onChange={setActionName}
+            label="アクション名 *"
+            placeholder="例: Jira Issue"
+            required
+            error={errors.name}
+          />
 
-          <div css={formGroupStyle}>
-            <label htmlFor="urlTemplate" css={labelStyle}>
-              URLテンプレート *
-            </label>
-            <div css={inputGroupStyle}>
-              <input
-                type="text"
+          <div css={inputGroupStyle}>
+            <div css={inputGroupInputStyle}>
+              <Input
                 id="urlTemplate"
                 value={urlTemplate}
-                onChange={(e) => setUrlTemplate(e.target.value)}
+                onChange={setUrlTemplate}
+                label="URLテンプレート *"
                 placeholder="例: https://jira.example.com/browse/PROJECT-{selText}"
                 required
-                css={[inputStyle, inputGroupInputStyle]}
+                error={errors.url}
               />
-              <button
-                type="button"
-                css={smallButtonStyle}
-                onClick={insertSelText}
-              >
-                置換文字列を挿入
-              </button>
             </div>
-            {errors.url && <div css={errorStyle}>{errors.url}</div>}
+            <Button variant="secondary" size="small" onClick={insertSelText}>
+              置換文字列を挿入
+            </Button>
           </div>
 
-          <button type="submit" css={buttonStyle()}>
+          <Button type="submit" variant="primary">
             アクションを追加
-          </button>
+          </Button>
         </form>
 
         {successMessage && <div css={successStyle}>{successMessage}</div>}
@@ -419,12 +339,12 @@ const Options: React.FC = () => {
                       ↓
                     </span>
                   )}
-                  <button
-                    css={buttonStyle("danger")}
+                  <Button
+                    variant="danger"
                     onClick={() => deleteAction(action.id)}
                   >
                     削除
-                  </button>
+                  </Button>
                 </div>
                 <div css={actionNameStyle}>{escapeHtml(action.name)}</div>
                 <div css={actionUrlStyle}>{escapeHtml(action.urlTemplate)}</div>
@@ -432,7 +352,7 @@ const Options: React.FC = () => {
             ))
           )}
         </div>
-      </div>
+      </Card>
     </div>
   );
 };
