@@ -189,9 +189,9 @@ class ActionManager {
     const urlInput = document.getElementById('urlTemplate') as HTMLInputElement;
     if (!urlInput) return;
     
-    const cursorPos = urlInput.selectionStart || 0;
+    const cursorPos = urlInput.selectionStart ?? 0;
     const textBefore = urlInput.value.substring(0, cursorPos);
-    const textAfter = urlInput.value.substring(urlInput.selectionEnd || cursorPos);
+    const textAfter = urlInput.value.substring(urlInput.selectionEnd ?? cursorPos);
     
     urlInput.value = textBefore + '{selText}' + textAfter;
     
