@@ -44,6 +44,12 @@ class ActionManager {
     if (form) {
       form.addEventListener('submit', (e) => this.handleFormSubmit(e));
     }
+    
+    // {selText}挿入ボタンのイベントリスナー
+    const insertSelTextBtn = document.getElementById('insertSelTextBtn') as HTMLButtonElement;
+    if (insertSelTextBtn) {
+      insertSelTextBtn.addEventListener('click', () => this.insertSelText());
+    }
   }
 
   async handleFormSubmit(e: Event): Promise<void> {
@@ -176,6 +182,23 @@ class ActionManager {
     const div = document.createElement('div');
     div.textContent = text;
     return div.innerHTML;
+  }
+
+  // {selText}を挿入するメソッド
+  insertSelText(): void {
+    const urlInput = document.getElementById('urlTemplate') as HTMLInputElement;
+    if (!urlInput) return;
+    
+    const cursorPos = urlInput.selectionStart ?? 0;
+    const textBefore = urlInput.value.substring(0, cursorPos);
+    const textAfter = urlInput.value.substring(urlInput.selectionEnd ?? cursorPos);
+    
+    urlInput.value = textBefore + '{selText}' + textAfter;
+    
+    // カーソル位置を{selText}の後ろに移動
+    const newCursorPos = cursorPos + '{selText}'.length;
+    urlInput.setSelectionRange(newCursorPos, newCursorPos);
+    urlInput.focus();
   }
 }
 
