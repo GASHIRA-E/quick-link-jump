@@ -47,6 +47,12 @@ export const Options: React.FC = () => {
 
   const loadActions = async (): Promise<void> => {
     try {
+      if (!chrome?.storage?.sync?.get) {
+        console.error("Chrome storage API が利用できません");
+        setActions([]);
+        return;
+      }
+
       const result = await chrome.storage.sync.get("actions");
       setActions(result.actions || []);
     } catch (error) {
@@ -99,7 +105,18 @@ export const Options: React.FC = () => {
 
     const newActions = [...actions, newAction];
     setActions(newActions);
-    await chrome.storage.sync.set({ actions: newActions });
+
+    try {
+      if (!chrome?.storage?.sync?.set) {
+        console.error("Chrome storage API が利用できません");
+        return;
+      }
+      await chrome.storage.sync.set({ actions: newActions });
+    } catch (error) {
+      console.error("Failed to save actions:", error);
+      setErrors({ url: "アクションの保存に失敗しました" });
+      return;
+    }
 
     setActionName("");
     setUrlTemplate("");
@@ -115,7 +132,17 @@ export const Options: React.FC = () => {
     if (confirm("このアクションを削除しますか？")) {
       const newActions = actions.filter((action) => action.id !== actionId);
       setActions(newActions);
-      await chrome.storage.sync.set({ actions: newActions });
+
+      try {
+        if (!chrome?.storage?.sync?.set) {
+          console.error("Chrome storage API が利用できません");
+          return;
+        }
+        await chrome.storage.sync.set({ actions: newActions });
+      } catch (error) {
+        console.error("Failed to delete action:", error);
+        alert("アクションの削除に失敗しました");
+      }
     }
   };
 
@@ -131,7 +158,17 @@ export const Options: React.FC = () => {
     const action = newActions.splice(fromIndex, 1)[0];
     newActions.splice(toIndex, 0, action);
     setActions(newActions);
-    await chrome.storage.sync.set({ actions: newActions });
+
+    try {
+      if (!chrome?.storage?.sync?.set) {
+        console.error("Chrome storage API が利用できません");
+        return;
+      }
+      await chrome.storage.sync.set({ actions: newActions });
+    } catch (error) {
+      console.error("Failed to move action:", error);
+      alert("アクションの移動に失敗しました");
+    }
   };
 
   const insertSelText = (): void => {

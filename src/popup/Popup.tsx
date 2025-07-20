@@ -28,17 +28,25 @@ const infoStyle = css`
 
 export const Popup: React.FC = () => {
   const handleOpenOptions = () => {
-    chrome.runtime.openOptionsPage();
+    try {
+      if (chrome?.runtime?.openOptionsPage) {
+        chrome.runtime.openOptionsPage();
+      } else {
+        console.error("Chrome extension API が利用できません");
+      }
+    } catch (error) {
+      console.error("設定ページを開けませんでした:", error);
+    }
   };
 
   return (
     <div css={containerStyle}>
       <h1 css={titleStyle}>Quick Link Jump</h1>
 
-      <Button 
-        variant="primary" 
-        size="large" 
-        fullWidth 
+      <Button
+        variant="primary"
+        size="large"
+        fullWidth
         onClick={handleOpenOptions}
       >
         ⚙️ 設定を開く

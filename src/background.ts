@@ -23,31 +23,47 @@ chrome.storage.onChanged.addListener((changes: { [key: string]: chrome.storage.S
 
 // コンテキストメニューの更新
 async function updateContextMenus(): Promise<void> {
-  // 既存のメニューを削除
-  await chrome.contextMenus.removeAll();
-  
-  // ストレージからアクションを取得
-  const result = await chrome.storage.sync.get('actions');
-  const actions: Action[] = result.actions || [];
-  
-  // アクションが存在する場合のみメニューを作成
-  if (actions.length > 0) {
-    actions.forEach((action, index) => {
-      chrome.contextMenus.create({
-        id: `action_${index}`,
-        title: action.name,
-        contexts: ['selection']
+  try {
+    // Chrome APIの利用可能性をチェック
+    if (!chrome?.contextMenus?.removeAll || !chrome?.storage?.sync?.get || !chrome?.contextMenus?.create) {
+      console.error('Chrome extension API が利用できません');
+      return;
+    }
+
+    // 既存のメニューを削除
+    await chrome.contextMenus.removeAll();
+    
+    // ストレージからアクションを取得
+    const result = await chrome.storage.sync.get('actions');
+    const actions: Action[] = result.actions || [];
+    
+    // アクションが存在する場合のみメニューを作成
+    if (actions.length > 0) {
+      actions.forEach((action, index) => {
+        try {
+          chrome.contextMenus.create({
+            id: `action_${index}`,
+            title: action.name,
+            contexts: ['selection']
+          });
+        } catch (error) {
+          console.error(`Failed to create context menu for action ${index}:`, error);
+        }
       });
-    });
+    }
+    
+    contextMenuItems = actions;
+  } catch (error) {
+    console.error('Failed to update context menus:', error);
   }
-  
-  contextMenuItems = actions;
 }
 
 // コンテキストメニューのクリック処理
 chrome.contextMenus.onClicked.addListener(async (info: chrome.contextMenus.OnClickData, tab?: chrome.tabs.Tab) => {
-  if (info.menuItemId.startsWith('action_')) {
-    const index = parseInt(info.menuItemId.replace('action_', ''));
+  const menuItemId = String(info.menuItemId);
+  
+  if (menuItemId.startsWith('action_')) {
+    const index = parseInt(menuItemId.replace('action_', ''));
     const action = contextMenuItems[index];
     
     if (action) {
@@ -58,6 +74,10 @@ chrome.contextMenus.onClicked.addListener(async (info: chrome.contextMenus.OnCli
       
       // 新規タブでリンクを開く
       try {
+        if (!chrome?.tabs?.create) {
+          console.error('Chrome tabs API が利用できません');
+          return;
+        }
         await chrome.tabs.create({ url: url });
       } catch (error) {
         console.error('Failed to open URL:', error);
