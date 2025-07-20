@@ -14,7 +14,8 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "types": ["chrome"]
+    "jsx": "react-jsx",
+    "types": ["chrome", "react", "react-dom"]
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
