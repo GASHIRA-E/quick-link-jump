@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "Quick Link Jump",
+  "version": "1.0.0",
+  "description": "選択したテキストをURLテンプレートに埋め込んでリンクを開くChrome拡張機能",
+  "permissions": ["contextMenus", "storage", "tabs"],
+  "background": {
+    "service_worker": "js/background.js"
+  },
+  "options_page": "options.html",
+  "action": {
+    "default_title": "Quick Link Jump",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
