@@ -51,7 +51,7 @@ const buttonStyles = (variant: string, size: string, fullWidth: boolean) => css`
   }
 `;
 
-const Button: React.FC<ButtonProps> = ({
+export const Button: React.FC<ButtonProps> = ({
   variant = "primary",
   size = "medium",
   children,
@@ -71,5 +71,3 @@ const Button: React.FC<ButtonProps> = ({
     </button>
   );
 };
-
-export default Button;

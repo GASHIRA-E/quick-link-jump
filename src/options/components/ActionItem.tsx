@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React from "react";
 import { css } from "@emotion/react";
-import Button from "../../common/parts/Button";
+import { Button } from "../../common/parts/Button";
 
 interface Action {
   id: string;
@@ -51,7 +51,7 @@ const dragHandleStyle = css`
   margin-right: 10px;
 `;
 
-const ActionItem: React.FC<ActionItemProps> = ({
+export const ActionItem: React.FC<ActionItemProps> = ({
   action,
   index,
   totalActions,
@@ -86,5 +86,3 @@ const ActionItem: React.FC<ActionItemProps> = ({
     </div>
   );
 };
-
-export default ActionItem;

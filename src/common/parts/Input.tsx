@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React from "react";
+import { forwardRef } from "react";
 import { css } from "@emotion/react";
 
 interface InputProps {
@@ -52,7 +52,7 @@ const errorStyle = css`
   margin-top: 5px;
 `;
 
-const Input: React.FC<InputProps> = ({
+export const Input = forwardRef<HTMLInputElement, InputProps>(({
   id,
   value,
   onChange,
@@ -62,7 +62,7 @@ const Input: React.FC<InputProps> = ({
   label,
   type = "text",
   disabled = false,
-}) => {
+}, ref) => {
   return (
     <div css={inputContainerStyle}>
       {label && (
@@ -71,6 +71,7 @@ const Input: React.FC<InputProps> = ({
         </label>
       )}
       <input
+        ref={ref}
         id={id}
         type={type}
         value={value}
@@ -83,6 +84,4 @@ const Input: React.FC<InputProps> = ({
       {error && <div css={errorStyle}>{error}</div>}
     </div>
   );
-};
-
-export default Input;
+});

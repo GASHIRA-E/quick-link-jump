@@ -24,7 +24,7 @@ const exampleItemStyle = css`
   margin-bottom: 5px;
 `;
 
-const ExampleSection: React.FC = () => {
+export const ExampleSection: React.FC = () => {
   return (
     <div css={exampleStyle}>
       <h3 css={exampleTitleStyle}>使用例</h3>
@@ -54,5 +54,3 @@ const ExampleSection: React.FC = () => {
     </div>
   );
 };
-
-export default ExampleSection;

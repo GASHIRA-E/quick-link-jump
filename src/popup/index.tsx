@@ -1,5 +1,5 @@
 import { createRoot } from "react-dom/client";
-import Popup from "./Popup";
+import { Popup } from "./Popup";
 
 // DOMContentLoadedイベントを待ってからReactアプリを初期化
 document.addEventListener("DOMContentLoaded", () => {

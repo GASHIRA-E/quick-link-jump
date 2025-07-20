@@ -1,10 +1,10 @@
 /** @jsxImportSource @emotion/react */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { css } from "@emotion/react";
-import Card from "../common/parts/Card";
-import ExampleSection from "./components/ExampleSection";
-import ActionForm from "./components/ActionForm";
-import ActionsList from "./components/ActionsList";
+import { Card } from "../common/parts/Card";
+import { ExampleSection } from "./components/ExampleSection";
+import { ActionForm } from "./components/ActionForm";
+import { ActionsList } from "./components/ActionsList";
 
 interface Action {
   id: string;
@@ -33,7 +33,8 @@ const successStyle = css`
   margin-top: 5px;
 `;
 
-const Options: React.FC = () => {
+export const Options: React.FC = () => {
+  const urlInputRef = useRef<HTMLInputElement>(null);
   const [actions, setActions] = useState<Action[]>([]);
   const [actionName, setActionName] = useState("");
   const [urlTemplate, setUrlTemplate] = useState("");
@@ -53,8 +54,6 @@ const Options: React.FC = () => {
       setActions([]);
     }
   };
-
-
 
   const validateAction = (name: string, urlTemplate: string): boolean => {
     const newErrors: { [key: string]: string } = {};
@@ -136,14 +135,12 @@ const Options: React.FC = () => {
   };
 
   const insertSelText = (): void => {
-    const urlInput = document.getElementById("urlTemplate") as HTMLInputElement;
+    const urlInput = urlInputRef.current;
     if (!urlInput) return;
 
     const cursorPos = urlInput.selectionStart ?? 0;
-    const textBefore = urlInput.value.substring(0, cursorPos);
-    const textAfter = urlInput.value.substring(
-      urlInput.selectionEnd ?? cursorPos
-    );
+    const textBefore = urlTemplate.substring(0, cursorPos);
+    const textAfter = urlTemplate.substring(urlInput.selectionEnd ?? cursorPos);
 
     const newValue = textBefore + "{selText}" + textAfter;
     setUrlTemplate(newValue);
@@ -156,8 +153,6 @@ const Options: React.FC = () => {
     }, 0);
   };
 
-
-
   return (
     <div css={containerStyle}>
       <Card>
@@ -166,6 +161,7 @@ const Options: React.FC = () => {
         <ExampleSection />
 
         <ActionForm
+          ref={urlInputRef}
           actionName={actionName}
           urlTemplate={urlTemplate}
           errors={errors}
@@ -186,5 +182,3 @@ const Options: React.FC = () => {
     </div>
   );
 };
-
-export default Options;

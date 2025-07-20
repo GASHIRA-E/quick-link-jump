@@ -1,5 +1,5 @@
 import { createRoot } from "react-dom/client";
-import Options from "./Options";
+import { Options } from "./Options";
 
 // DOMContentLoadedイベントを待ってからReactアプリを初期化
 document.addEventListener("DOMContentLoaded", () => {

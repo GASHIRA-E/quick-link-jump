@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React from "react";
 import { css } from "@emotion/react";
-import Button from "../common/parts/Button";
+import { Button } from "../common/parts/Button";
 
 const containerStyle = css`
   width: 300px;
@@ -26,7 +26,7 @@ const infoStyle = css`
   line-height: 1.4;
 `;
 
-const Popup: React.FC = () => {
+export const Popup: React.FC = () => {
   const handleOpenOptions = () => {
     chrome.runtime.openOptionsPage();
   };
@@ -56,5 +56,3 @@ const Popup: React.FC = () => {
     </div>
   );
 };
-
-export default Popup;

@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
-import React from "react";
+import React, { forwardRef } from "react";
 import { css } from "@emotion/react";
-import Button from "../../common/parts/Button";
-import Input from "../../common/parts/Input";
+import { Button } from "../../common/parts/Button";
+import { Input } from "../../common/parts/Input";
 
 interface ActionFormProps {
   actionName: string;
@@ -24,7 +24,7 @@ const inputGroupInputStyle = css`
   flex: 1;
 `;
 
-const ActionForm: React.FC<ActionFormProps> = ({
+export const ActionForm = forwardRef<HTMLInputElement, ActionFormProps>(({
   actionName,
   urlTemplate,
   errors,
@@ -32,7 +32,7 @@ const ActionForm: React.FC<ActionFormProps> = ({
   onUrlTemplateChange,
   onSubmit,
   onInsertSelText,
-}) => {
+}, ref) => {
   return (
     <form onSubmit={onSubmit}>
       <Input
@@ -48,6 +48,7 @@ const ActionForm: React.FC<ActionFormProps> = ({
       <div css={inputGroupStyle}>
         <div css={inputGroupInputStyle}>
           <Input
+            ref={ref}
             id="urlTemplate"
             value={urlTemplate}
             onChange={onUrlTemplateChange}
@@ -67,6 +68,4 @@ const ActionForm: React.FC<ActionFormProps> = ({
       </Button>
     </form>
   );
-};
-
-export default ActionForm;
+});

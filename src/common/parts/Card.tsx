@@ -29,7 +29,7 @@ const cardStyles = (
   `}
 `;
 
-const Card: React.FC<CardProps> = ({
+export const Card: React.FC<CardProps> = ({
   children,
   padding = "medium",
   shadow = true,
@@ -42,5 +42,3 @@ const Card: React.FC<CardProps> = ({
     </div>
   );
 };
-
-export default Card;

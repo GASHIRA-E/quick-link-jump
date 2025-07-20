@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React from "react";
 import { css } from "@emotion/react";
-import ActionItem from "./ActionItem";
+import { ActionItem } from "./ActionItem";
 
 interface Action {
   id: string;
@@ -24,7 +24,7 @@ const emptyMessageStyle = css`
   text-align: center;
 `;
 
-const ActionsList: React.FC<ActionsListProps> = ({
+export const ActionsList: React.FC<ActionsListProps> = ({
   actions,
   onDelete,
   onMove,
@@ -49,5 +49,3 @@ const ActionsList: React.FC<ActionsListProps> = ({
     </div>
   );
 };
-
-export default ActionsList;
