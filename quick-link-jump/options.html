@@ -37,18 +37,13 @@
       color: #555;
     }
     
-    input[type="text"], textarea {
+    input[type="text"] {
       width: 100%;
       padding: 10px;
       border: 1px solid #ddd;
       border-radius: 4px;
       font-size: 14px;
       box-sizing: border-box;
-    }
-    
-    textarea {
-      height: 80px;
-      resize: vertical;
     }
     
     .btn {
@@ -171,7 +166,7 @@
       
       <div class="form-group">
         <label for="urlTemplate">URLテンプレート *</label>
-        <textarea id="urlTemplate" placeholder="例: https://jira.example.com/browse/PROJECT-{selText}" required></textarea>
+        <input type="text" id="urlTemplate" placeholder="例: https://jira.example.com/browse/PROJECT-{selText}" required>
         <div id="urlError" class="error"></div>
       </div>
       
