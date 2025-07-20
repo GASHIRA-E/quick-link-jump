@@ -8,8 +8,8 @@ interface ActionFormProps {
   actionName: string;
   urlTemplate: string;
   errors: { [key: string]: string };
-  onActionNameChange: (value: string) => void;
-  onUrlTemplateChange: (value: string) => void;
+  onActionNameChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onUrlTemplateChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmit: (e: React.FormEvent) => void;
   onInsertSelText: () => void;
 }

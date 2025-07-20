@@ -6,7 +6,7 @@ import { COLORS, FONTS, SPACING, BORDERS } from "../styles";
 interface InputProps {
   id: string;
   value: string;
-  onChange: (value: string) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
   required?: boolean;
   error?: string;
@@ -102,7 +102,7 @@ export const Input = forwardRef<
           id={id}
           type={type}
           value={value}
-          onChange={(e) => onChange(e.target.value)}
+          onChange={onChange}
           placeholder={placeholder}
           required={required}
           disabled={disabled}

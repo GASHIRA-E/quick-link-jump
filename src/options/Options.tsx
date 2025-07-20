@@ -211,8 +211,8 @@ export const Options: React.FC = () => {
           actionName={actionName}
           urlTemplate={urlTemplate}
           errors={errors}
-          onActionNameChange={setActionName}
-          onUrlTemplateChange={setUrlTemplate}
+          onActionNameChange={(e) => setActionName(e.target.value)}
+          onUrlTemplateChange={(e) => setUrlTemplate(e.target.value)}
           onSubmit={handleSubmit}
           onInsertSelText={insertSelText}
         />
