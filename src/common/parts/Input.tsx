@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { forwardRef } from "react";
 import { css } from "@emotion/react";
+import { COLORS, FONTS, SPACING, BORDERS } from "../styles";
 
 interface InputProps {
   id: string;
@@ -15,41 +16,41 @@ interface InputProps {
 }
 
 const inputContainerStyle = css`
-  margin-bottom: 20px;
+  margin-bottom: ${SPACING.lg};
 `;
 
 const labelStyle = css`
   display: block;
-  margin-bottom: 5px;
-  font-weight: 600;
-  color: #555;
-  font-size: 14px;
+  margin-bottom: ${SPACING.xs};
+  font-weight: ${FONTS.weights.semibold};
+  color: ${COLORS.gray[700]};
+  font-size: ${FONTS.sizes.sm};
 `;
 
 const inputStyle = css`
   width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 14px;
+  padding: ${SPACING.sm};
+  border: ${BORDERS.width.thin} solid ${COLORS.gray[300]};
+  border-radius: ${BORDERS.radius.sm};
+  font-size: ${FONTS.sizes.sm};
   box-sizing: border-box;
   transition: border-color 0.2s ease;
 
   &:focus {
     outline: none;
-    border-color: #007bff;
+    border-color: ${COLORS.primary};
   }
 
   &:disabled {
-    background-color: #f5f5f5;
+    background-color: ${COLORS.gray[100]};
     cursor: not-allowed;
   }
 `;
 
 const errorStyle = css`
-  color: #dc3545;
-  font-size: 12px;
-  margin-top: 5px;
+  color: ${COLORS.danger};
+  font-size: ${FONTS.sizes.xs};
+  margin-top: ${SPACING.xs};
 `;
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(({

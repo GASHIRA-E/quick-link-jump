@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React from "react";
 import { css } from "@emotion/react";
+import { BUTTON_COLORS, BUTTON_SIZES } from "../styles";
 
 interface ButtonProps {
   variant?: "primary" | "secondary" | "danger";
@@ -12,42 +13,24 @@ interface ButtonProps {
   fullWidth?: boolean;
 }
 
-const buttonStyles = (variant: string, size: string, fullWidth: boolean) => css`
-  background: ${variant === "secondary"
-    ? "#6c757d"
-    : variant === "danger"
-    ? "#dc3545"
-    : "#007bff"};
+const buttonStyles = (variant: ButtonProps['variant'], size: ButtonProps['size'], fullWidth: boolean) => css`
+  background: ${BUTTON_COLORS[variant || 'primary'].normal};
   color: white;
   border: none;
-  padding: ${size === "small"
-    ? "8px 12px"
-    : size === "large"
-    ? "12px 24px"
-    : "10px 20px"};
+  padding: ${BUTTON_SIZES[size || 'medium'].padding};
   border-radius: 4px;
   cursor: pointer;
-  font-size: ${size === "small" ? "12px" : size === "large" ? "16px" : "14px"};
+  font-size: ${BUTTON_SIZES[size || 'medium'].fontSize};
   transition: background-color 0.2s ease;
   width: ${fullWidth ? "100%" : "auto"};
-  margin-right: ${fullWidth ? "0" : "10px"};
-  margin-bottom: ${fullWidth ? "10px" : "0"};
 
   &:hover {
-    background: ${variant === "secondary"
-      ? "#5a6268"
-      : variant === "danger"
-      ? "#c82333"
-      : "#0056b3"};
+    background: ${BUTTON_COLORS[variant || 'primary'].hover};
   }
 
   &:disabled {
     opacity: 0.6;
     cursor: not-allowed;
-  }
-
-  &:last-child {
-    margin-right: 0;
   }
 `;
 
