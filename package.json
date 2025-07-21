@@ -15,12 +15,14 @@
     "dev:popup": "vite build --watch --config vite.popup.config.js",
     "dev:background": "vite build --watch --config vite.background.config.js",
     "dev": "concurrently \"npm run dev:background\" \"npm run dev:options\" \"npm run dev:popup\" \"npm run dev:content\"",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "docs:serve": "docsify serve docs & open http://localhost:3000"
   },
   "devDependencies": {
     "@types/chrome": "^0.0.260",
     "@vitejs/plugin-react": "^4.7.0",
     "concurrently": "^8.2.2",
+    "docsify-cli": "^4.4.4",
     "typescript": "^5.3.3",
     "vite": "^5.0.10"
   },
