@@ -14,58 +14,68 @@ interface ActionFormProps {
   onInsertSelText: () => void;
 }
 
-const inputGroupStyle = css`
+const formStyle = css`
   display: flex;
-  gap: 10px;
-  align-items: flex-end;
+  flex-direction: column;
+  gap: 24px;
 `;
 
-const inputGroupInputStyle = css`
-  flex: 1;
+const insertButtonStyle = css`
+  white-space: nowrap;
 `;
 
-export const ActionForm = forwardRef<HTMLInputElement, ActionFormProps>(({
-  actionName,
-  urlTemplate,
-  errors,
-  onActionNameChange,
-  onUrlTemplateChange,
-  onSubmit,
-  onInsertSelText,
-}, ref) => {
-  return (
-    <form onSubmit={onSubmit}>
-      <Input
-        id="actionName"
-        value={actionName}
-        onChange={onActionNameChange}
-        label="アクション名 *"
-        placeholder="例: Jira Issue"
-        required
-        error={errors.name}
-      />
+export const ActionForm = forwardRef<HTMLInputElement, ActionFormProps>(
+  (
+    {
+      actionName,
+      urlTemplate,
+      errors,
+      onActionNameChange,
+      onUrlTemplateChange,
+      onSubmit,
+      onInsertSelText,
+    },
+    ref
+  ) => {
+    return (
+      <form onSubmit={onSubmit} css={formStyle}>
+        <Input
+          id="actionName"
+          value={actionName}
+          onChange={onActionNameChange}
+          label="アクション名"
+          placeholder="例: Jira Issue"
+          required
+          error={errors.name}
+        />
 
-      <div css={inputGroupStyle}>
-        <div css={inputGroupInputStyle}>
-          <Input
-            ref={ref}
-            id="urlTemplate"
-            value={urlTemplate}
-            onChange={onUrlTemplateChange}
-            label="URLテンプレート *"
-            placeholder="例: https://jira.example.com/browse/PROJECT-{selText}"
-            required
-            error={errors.url}
-          />
+        <Input
+          ref={ref}
+          id="urlTemplate"
+          value={urlTemplate}
+          onChange={onUrlTemplateChange}
+          label="URLテンプレート"
+          placeholder="例: https://jira.example.com/browse/PROJECT-{selText}"
+          required
+          error={errors.url}
+          actionButton={
+            <Button
+              css={insertButtonStyle}
+              variant="secondary"
+              size="small"
+              onClick={onInsertSelText}
+            >
+              置換文字列を挿入
+            </Button>
+          }
+        />
+
+        <div>
+          <Button type="submit" variant="primary">
+            アクションを追加
+          </Button>
         </div>
-        <Button variant="secondary" size="small" onClick={onInsertSelText}>
-          置換文字列を挿入
-        </Button>
-      </div>
-
-      <Button type="submit" variant="primary">
-        アクションを追加
-      </Button>
-    </form>
-  );
-});
+      </form>
+    );
+  }
+);
