@@ -16,11 +16,8 @@ interface InputProps {
   autoComplete?: string;
   maxLength?: number;
   pattern?: string;
+  actionButton?: React.ReactNode;
 }
-
-const inputContainerStyle = css`
-  margin-bottom: ${SPACING.lg};
-`;
 
 const labelStyle = css`
   display: block;
@@ -65,6 +62,12 @@ const errorStyle = css`
   margin-top: ${SPACING.xs};
 `;
 
+const inputContainerStyle = css`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
+
 export const Input = forwardRef<
   HTMLInputElement,
   InputProps & React.InputHTMLAttributes<HTMLInputElement>
@@ -72,17 +75,12 @@ export const Input = forwardRef<
   (
     {
       id,
-      value,
-      onChange,
-      placeholder,
       required = false,
       error,
       label,
       type = "text",
       disabled = false,
-      autoComplete,
-      maxLength,
-      pattern,
+      actionButton,
       ...rest
     },
     ref
@@ -90,30 +88,27 @@ export const Input = forwardRef<
     const errorId = error ? `${id}-error` : undefined;
 
     return (
-      <div css={inputContainerStyle}>
+      <div>
         {label && (
           <label htmlFor={id} css={labelStyle}>
             {label}
             {required && <span css={requiredStyle}>*</span>}
           </label>
         )}
-        <input
-          ref={ref}
-          id={id}
-          type={type}
-          value={value}
-          onChange={onChange}
-          placeholder={placeholder}
-          required={required}
-          disabled={disabled}
-          autoComplete={autoComplete}
-          maxLength={maxLength}
-          pattern={pattern}
-          aria-describedby={errorId}
-          aria-invalid={!!error}
-          {...rest}
-          css={inputStyle}
-        />
+        <div css={inputContainerStyle}>
+          <input
+            ref={ref}
+            id={id}
+            type={type}
+            required={required}
+            disabled={disabled}
+            aria-describedby={errorId}
+            aria-invalid={!!error}
+            {...rest}
+            css={inputStyle}
+          />
+          {actionButton}
+        </div>
         {error && (
           <div id={errorId} css={errorStyle} role="alert">
             {error}
