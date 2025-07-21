@@ -12,7 +12,7 @@
 
 ## ファイル構成
 
-```
+```text
 quick-link-jump/
 ├── manifest.json      # 拡張機能の設定ファイル
 ├── background.js      # Service Worker（バックグラウンド処理）
@@ -21,6 +21,15 @@ quick-link-jump/
 ├── README.md          # このファイル
 └── 指示書.md          # 開発指示書
 ```
+
+## 環境準備
+
+1. `npm install` を実行し、依存パッケージをインストール
+2. `npm run dev` を実行し、watchモードでビルドを実施
+3. Chromeで `chrome://extensions/` を開く
+4. 「デベロッパーモード」を有効にする
+5. 「パッケージ化されていない拡張機能を読み込む」をクリック
+6. ビルド後のファイルが格納される `quick-link-jump/quick-link-jump` を選択
 
 ## ローカル開発
 
