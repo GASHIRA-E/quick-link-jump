@@ -22,7 +22,6 @@ const actionItemStyle = css`
   border: 1px solid #e9ecef;
   border-radius: 8px;
   padding: 12px;
-  margin-bottom: 8px;
   display: grid;
   grid-template-columns: 1fr auto auto;
   gap: 12px;

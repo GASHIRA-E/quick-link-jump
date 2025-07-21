@@ -24,6 +24,12 @@ const emptyMessageStyle = css`
   text-align: center;
 `;
 
+const actionsContainerStyle = css`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+
 export const ActionsList: React.FC<ActionsListProps> = ({
   actions,
   onDelete,
@@ -35,16 +41,18 @@ export const ActionsList: React.FC<ActionsListProps> = ({
       {actions.length === 0 ? (
         <p css={emptyMessageStyle}>登録されたアクションがありません</p>
       ) : (
-        actions.map((action, index) => (
-          <ActionItem
-            key={action.id}
-            action={action}
-            index={index}
-            totalActions={actions.length}
-            onDelete={onDelete}
-            onMove={onMove}
-          />
-        ))
+        <div css={actionsContainerStyle}>
+          {actions.map((action, index) => (
+            <ActionItem
+              key={action.id}
+              action={action}
+              index={index}
+              totalActions={actions.length}
+              onDelete={onDelete}
+              onMove={onMove}
+            />
+          ))}
+        </div>
       )}
     </div>
   );
