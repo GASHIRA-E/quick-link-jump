@@ -1,0 +1,4 @@
+.cover {
+  /* ライブラリの仕様上直接styleで背景が設定されるため、上書きをするためにimportantを使用 */
+  background: linear-gradient(to bottom left, #8aa82c, #4ca31a) !important;
+}

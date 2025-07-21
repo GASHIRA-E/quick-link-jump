@@ -16,6 +16,7 @@
     "dev:background": "vite build --watch --config vite.background.config.js",
     "dev": "concurrently \"npm run dev:background\" \"npm run dev:options\" \"npm run dev:popup\" \"npm run dev:content\"",
     "preview": "vite preview",
+    "docs:serve": "docsify serve docs -p 3000 --open",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
@@ -25,6 +26,7 @@
     "@types/eslint__js": "^8.42.3",
     "@vitejs/plugin-react": "^4.7.0",
     "concurrently": "^8.2.2",
+    "docsify-cli": "^4.4.4",
     "eslint": "^9.31.0",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
