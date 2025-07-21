@@ -14,7 +14,7 @@
     "dev:options": "vite build --watch --config vite.options.config.js",
     "dev:popup": "vite build --watch --config vite.popup.config.js",
     "dev:background": "vite build --watch --config vite.background.config.js",
-    "dev": "concurrently \"npm run dev:background\" \"npm run dev:options\"",
+    "dev": "concurrently \"npm run dev:background\" \"npm run dev:options\" \"npm run dev:popup\" \"npm run dev:content\"",
     "preview": "vite preview"
   },
   "devDependencies": {
