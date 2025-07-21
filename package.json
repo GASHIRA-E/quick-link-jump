@@ -16,7 +16,7 @@
     "dev:background": "vite build --watch --config vite.background.config.js",
     "dev": "concurrently \"npm run dev:background\" \"npm run dev:options\" \"npm run dev:popup\" \"npm run dev:content\"",
     "preview": "vite preview",
-    "docs:serve": "docsify serve docs & open http://localhost:3000"
+    "docs:serve": "docsify serve docs -p 3000 --open"
   },
   "devDependencies": {
     "@types/chrome": "^0.0.260",
