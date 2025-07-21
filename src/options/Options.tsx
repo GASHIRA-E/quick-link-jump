@@ -32,6 +32,12 @@ const successStyle = css`
   margin-top: 5px;
 `;
 
+const mainCardStyle = css`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
+
 export const Options: React.FC = () => {
   const urlInputRef = useRef<HTMLInputElement>(null);
   const [actions, setActions] = useState<Action[]>([]);
@@ -201,7 +207,7 @@ export const Options: React.FC = () => {
   return (
     <div css={containerStyle}>
       <StyleReset />
-      <Card>
+      <Card customCss={mainCardStyle}>
         <h1 css={titleStyle}>Quick Link Jump 設定</h1>
 
         <ExampleSection />

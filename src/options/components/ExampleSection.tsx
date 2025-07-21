@@ -5,7 +5,6 @@ import { Card } from "@/common/parts/Card";
 
 const exampleCardStyle = css`
   border: 1px solid #b3d9ff;
-  margin: 20px 0;
 `;
 
 const exampleTitleStyle = css`
@@ -30,7 +29,7 @@ export const ExampleSection: React.FC = () => {
       shadow={false}
       background="#e7f3ff"
       borderRadius="4px"
-      css={exampleCardStyle}
+      customCss={exampleCardStyle}
     >
       <h3 css={exampleTitleStyle}>使用例</h3>
       <ul css={exampleListStyle}>

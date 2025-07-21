@@ -10,7 +10,7 @@ interface CardProps {
   shadow?: boolean;
   background?: string;
   borderRadius?: string;
-  css?: SerializedStyles;
+  customCss?: SerializedStyles;
 }
 
 // パディングの型安全な定義
@@ -41,7 +41,7 @@ export const Card: React.FC<CardProps> = ({
   shadow = true,
   background = COLORS.white,
   borderRadius = BORDERS.radius.md,
-  css: customCss,
+  customCss,
 }) => {
   return (
     <div css={[cardStyles(padding, shadow, background, borderRadius), customCss]}>

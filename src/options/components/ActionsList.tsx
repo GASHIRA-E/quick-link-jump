@@ -15,8 +15,8 @@ interface ActionsListProps {
   onMove: (fromIndex: number, toIndex: number) => void;
 }
 
-const actionsListStyle = css`
-  margin-top: 30px;
+const titleStyle = css`
+  margin-bottom: 10px;
 `;
 
 const emptyMessageStyle = css`
@@ -36,8 +36,8 @@ export const ActionsList: React.FC<ActionsListProps> = ({
   onMove,
 }) => {
   return (
-    <div css={actionsListStyle}>
-      <h3>登録済みアクション</h3>
+    <div>
+      <h3 css={titleStyle}>登録済みアクション</h3>
       {actions.length === 0 ? (
         <p css={emptyMessageStyle}>登録されたアクションがありません</p>
       ) : (
