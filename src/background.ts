@@ -77,7 +77,14 @@ chrome.contextMenus.onClicked.addListener(
 
     if (menuItemId.startsWith("action_")) {
       const index = parseInt(menuItemId.replace("action_", ""));
-      const action = contextMenuItems[index];
+      let action = contextMenuItems[index];
+
+      // contextMenuItemsが空、またはactionがundefinedならストレージから取得
+      if (!action) {
+        const result = await chrome.storage.sync.get("actions");
+        const actions: Action[] = result.actions || [];
+        action = actions[index];
+      }
 
       if (action) {
         // 選択テキストが空の場合は空文字列として扱う
