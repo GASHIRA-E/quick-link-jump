@@ -14,9 +14,9 @@ export const BUTTON_SIZES = {
 
 // カードのパディング設定
 export const CARD_PADDINGS = {
-  small: '15px',
-  medium: '30px',
-  large: '40px'
+  small: '10px 20px',
+  medium: '20px 30px',
+  large: '30px 40px'
 } as const;
 
 // 共通の色設定

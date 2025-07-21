@@ -1,12 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import React from "react";
 import { css } from "@emotion/react";
+import { Card } from "@/common/parts/Card";
 
-const exampleStyle = css`
-  background: #e7f3ff;
+const exampleCardStyle = css`
   border: 1px solid #b3d9ff;
-  border-radius: 4px;
-  padding: 15px;
   margin: 20px 0;
 `;
 
@@ -18,6 +16,7 @@ const exampleTitleStyle = css`
 const exampleListStyle = css`
   margin: 10px 0;
   padding-left: 20px;
+  list-style: disc;
 `;
 
 const exampleItemStyle = css`
@@ -26,7 +25,13 @@ const exampleItemStyle = css`
 
 export const ExampleSection: React.FC = () => {
   return (
-    <div css={exampleStyle}>
+    <Card
+      padding="small"
+      shadow={false}
+      background="#e7f3ff"
+      borderRadius="4px"
+      css={exampleCardStyle}
+    >
       <h3 css={exampleTitleStyle}>使用例</h3>
       <ul css={exampleListStyle}>
         <li css={exampleItemStyle}>
@@ -51,6 +56,6 @@ export const ExampleSection: React.FC = () => {
         <code>{"{selText}"}</code>
         を含めてください。http/httpsのURLのみ対応しています。
       </p>
-    </div>
+    </Card>
   );
 };

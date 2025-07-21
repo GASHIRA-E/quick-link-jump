@@ -5,6 +5,7 @@ import { Card } from "@/common/parts/Card";
 import { ExampleSection } from "./components/ExampleSection";
 import { ActionForm } from "./components/ActionForm";
 import { ActionsList } from "./components/ActionsList";
+import { StyleReset } from "@/common/StyleReset";
 
 interface Action {
   id: string;
@@ -199,6 +200,7 @@ export const Options: React.FC = () => {
 
   return (
     <div css={containerStyle}>
+      <StyleReset />
       <Card>
         <h1 css={titleStyle}>Quick Link Jump 設定</h1>
 
