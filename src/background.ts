@@ -72,7 +72,7 @@ async function updateContextMenus(): Promise<void> {
 
 // コンテキストメニューのクリック処理
 chrome.contextMenus.onClicked.addListener(
-  async (info: chrome.contextMenus.OnClickData, tab?: chrome.tabs.Tab) => {
+  async (info: chrome.contextMenus.OnClickData) => {
     const menuItemId = String(info.menuItemId);
 
     if (menuItemId.startsWith("action_")) {
