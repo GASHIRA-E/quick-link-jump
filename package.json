@@ -9,7 +9,7 @@
     "build:popup": "vite build --config vite.popup.config.js",
     "build:background": "vite build --config vite.background.config.js",
     "build": "concurrently \"npm run build:background\" \"npm run build:options\" \"npm run build:popup\" \"npm run build:content\"",
-    "create-publish": "npm run build && zip -r publish/quick-link-jump-$(date \"+%Y-%m-%d-%H-%M-%S\").zip ./dist",
+    "create-publish": "npm run build && zip -r publish/quick-link-jump-$(date \"+%Y-%m-%d-%H-%M-%S\").zip ./quick-link-jump",
     "dev:content": "vite build --watch --config vite.content.config.js",
     "dev:options": "vite build --watch --config vite.options.config.js",
     "dev:popup": "vite build --watch --config vite.popup.config.js",
