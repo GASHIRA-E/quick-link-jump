@@ -1,12 +1,10 @@
 # Quick Link Jump 使い方ガイド
 
----
-
 ## この拡張機能について
 
-Quick Link Jumpは、ウェブページ上で選択したテキスト（例：チケット番号やPR番号など）を、あらかじめ登録したURLテンプレートに埋め込んで新しいタブで開くことができるChrome拡張です。JiraやGitHub、Google検索など、さまざまな用途に活用できます。
+Quick Link Jumpは、ウェブページ上で選択したテキスト（例：チケット番号やPR番号など）を、あらかじめ登録したURLテンプレートに埋め込んで新しいタブで開くことができるChrome拡張です。
 
----
+例えばJiraのチケット番号のみ共有された時に、チケット番号を選択しこの機能を使うことで簡単にチケットを開くことができます。
 
 ## 主な機能
 
@@ -15,9 +13,6 @@ Quick Link Jumpは、ウェブページ上で選択したテキスト（例：�
 - アクション（リンク）の並び替え
 - 新規タブでのリンクオープン
 - 100件までのアクション登録
-- セキュリティ対策（XSS防止、http/httpsのみ対応）
-
----
 
 ## インストール方法
 
@@ -27,34 +22,31 @@ Quick Link Jumpは、ウェブページ上で選択したテキスト（例：�
 4. 「パッケージ化されていない拡張機能を読み込む」をクリック
 5. このフォルダ（quick-link-jump）を選択
 
----
-
 ## 使い方
+
+### アクションの登録
 
 1. 拡張機能のアイコンをクリックし、設定ページを開く
 2. 「アクション名」と「URLテンプレート」を入力し、「アクションを追加」をクリック
-3. ウェブページ上で対象テキストを選択し、右クリックでコンテキストメニューを開く
-4. 登録したアクション名をクリックすると、テンプレートに埋め込まれたURLが新規タブで開きます
 
 - `{selText}` が選択テキストに置き換わります
 - テキスト未選択でも空のままリンクを開けます
 
----
+#### 設定例
 
-## 使用例
+| アクション名 | URLテンプレート                                     | 説明                |
+| ------------ | --------------------------------------------------- | ------------------- |
+| Jira Issue   | `https://jira.example.com/browse/PROJECT-{selText}` | JiraのIssueを開く   |
+| GitHub Issue | `https://github.com/org/repo/issues/{selText}`      | GitHubのIssueを開く |
+| GitHub PR    | `https://github.com/org/repo/pull/{selText}`        | GitHubのPRを開く    |
+| Google検索   | `https://www.google.com/search?q={selText}`         | Googleで検索        |
 
-| アクション名 | URLテンプレート | 説明 |
-|------------|----------------|------|
-| Jira Issue | `https://jira.example.com/browse/PROJECT-{selText}` | JiraのIssueを開く |
-| GitHub Issue | `https://github.com/org/repo/issues/{selText}` | GitHubのIssueを開く |
-| GitHub PR | `https://github.com/org/repo/pull/{selText}` | GitHubのPRを開く |
-| Google検索 | `https://www.google.com/search?q={selText}` | Googleで検索 |
+### アクションの利用
 
----
-
-## よくある質問
-
----
+1. ウェブページ上で対象テキスト（例：チケット番号など）を選択します。
+2. 右クリックして「Quick Link Jump」のサブメニューを開きます。
+3. 登録したアクション名をクリックします。
+4. 新規タブでリンクが開きます。
 
 ## 開発者向け情報
 
