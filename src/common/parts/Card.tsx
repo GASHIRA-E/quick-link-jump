@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React from "react";
 import { css } from "@emotion/react";
+import type { SerializedStyles } from "@emotion/react";
 import { CARD_PADDINGS, BORDERS, COLORS } from "@/common/styles";
 
 interface CardProps {
@@ -9,6 +10,7 @@ interface CardProps {
   shadow?: boolean;
   background?: string;
   borderRadius?: string;
+  customCss?: SerializedStyles;
 }
 
 // パディングの型安全な定義
@@ -39,9 +41,10 @@ export const Card: React.FC<CardProps> = ({
   shadow = true,
   background = COLORS.white,
   borderRadius = BORDERS.radius.md,
+  customCss,
 }) => {
   return (
-    <div css={cardStyles(padding, shadow, background, borderRadius)}>
+    <div css={[cardStyles(padding, shadow, background, borderRadius), customCss]}>
       {children}
     </div>
   );

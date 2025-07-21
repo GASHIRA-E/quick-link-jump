@@ -2,6 +2,7 @@
 import React from "react";
 import { css } from "@emotion/react";
 import { Button } from "@/common/parts/Button";
+import { StyleReset } from "@/common/StyleReset";
 
 const containerStyle = css`
   width: 300px;
@@ -41,6 +42,7 @@ export const Popup: React.FC = () => {
 
   return (
     <div css={containerStyle}>
+      <StyleReset />
       <h1 css={titleStyle}>Quick Link Jump</h1>
 
       <Button

@@ -5,6 +5,7 @@ import { Card } from "@/common/parts/Card";
 import { ExampleSection } from "./components/ExampleSection";
 import { ActionForm } from "./components/ActionForm";
 import { ActionsList } from "./components/ActionsList";
+import { StyleReset } from "@/common/StyleReset";
 
 interface Action {
   id: string;
@@ -17,8 +18,6 @@ const containerStyle = css`
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #f5f5f5;
-  min-height: 100vh;
 `;
 
 const titleStyle = css`
@@ -31,6 +30,12 @@ const successStyle = css`
   color: #28a745;
   font-size: 12px;
   margin-top: 5px;
+`;
+
+const mainCardStyle = css`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 `;
 
 export const Options: React.FC = () => {
@@ -201,7 +206,8 @@ export const Options: React.FC = () => {
 
   return (
     <div css={containerStyle}>
-      <Card>
+      <StyleReset />
+      <Card customCss={mainCardStyle}>
         <h1 css={titleStyle}>Quick Link Jump 設定</h1>
 
         <ExampleSection />
