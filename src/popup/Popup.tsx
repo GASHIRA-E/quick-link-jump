@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React from "react";
 import { css } from "@emotion/react";
-import { Button } from "../common/parts/Button";
+import { Button } from "@/common/parts/Button";
 
 const containerStyle = css`
   width: 300px;

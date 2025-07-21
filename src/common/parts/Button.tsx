@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React from "react";
 import { css } from "@emotion/react";
-import { BUTTON_COLORS, BUTTON_SIZES } from "../styles";
+import { BUTTON_COLORS, BUTTON_SIZES } from "@/common/styles";
 
 interface ButtonProps {
   variant?: "primary" | "secondary" | "danger";

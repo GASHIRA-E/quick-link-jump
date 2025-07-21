@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import React, { forwardRef } from "react";
 import { css } from "@emotion/react";
-import { Button } from "../../common/parts/Button";
-import { Input } from "../../common/parts/Input";
+import { Button } from "@/common/parts/Button";
+import { Input } from "@/common/parts/Input";
 
 interface ActionFormProps {
   actionName: string;

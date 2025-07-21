@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { forwardRef } from "react";
 import { css } from "@emotion/react";
-import { COLORS, FONTS, SPACING, BORDERS } from "../styles";
+import { COLORS, FONTS, SPACING, BORDERS } from "@/common/styles";
 
 interface InputProps {
   id: string;

@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React, { useState, useEffect, useRef } from "react";
 import { css } from "@emotion/react";
-import { Card } from "../common/parts/Card";
+import { Card } from "@/common/parts/Card";
 import { ExampleSection } from "./components/ExampleSection";
 import { ActionForm } from "./components/ActionForm";
 import { ActionsList } from "./components/ActionsList";

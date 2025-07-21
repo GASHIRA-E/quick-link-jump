@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React from "react";
 import { css } from "@emotion/react";
-import { CARD_PADDINGS, BORDERS, COLORS } from "../styles";
+import { CARD_PADDINGS, BORDERS, COLORS } from "@/common/styles";
 
 interface CardProps {
   children: React.ReactNode;
