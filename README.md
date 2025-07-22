@@ -1,80 +1,64 @@
 # Quick Link Jump
 
-選択したテキストをURLテンプレートに埋め込んでリンクを開くChrome拡張機能です。
+Quick Link Jumpは、ウェブページ上で選択したテキスト（例：チケット番号やPR番号など）を、あらかじめ登録したURLテンプレートに埋め込んで新しいタブで開くことができるChrome拡張機能です。
 
-## 機能
+例えばJiraのチケット番号のみ共有された時に、チケット番号を選択しこの機能を使うことで簡単にチケットを開くことができます。
 
-- テキスト選択時にコンテキストメニューに登録済みアクションを表示
-- カスタムURLテンプレートの追加・編集・削除
-- アクションの並び替え
-- 新規タブでリンクを開く
+## 主な機能
+
+- 選択テキストを使ったカスタムリンクの即時生成
+- URLテンプレートの追加・編集・削除
+- アクション（リンク）の並び替え
+- 新規タブでのリンクオープン
+- 最大100件までのアクション登録
+- React + EmotionによるモダンなUI
 
 ## インストール方法
 
 1. このリポジトリをクローンまたはダウンロード
-2. Chromeで `chrome://extensions/` を開く
-3. 「デベロッパーモード」を有効にする
-4. 「パッケージ化されていない拡張機能を読み込む」をクリック
-5. このフォルダを選択
+2. `npm install` を実行し、依存パッケージをインストール
+3. `npm run build` を実行し、`quick-link-jump`フォルダにビルドされたファイルが生成
+4. Chromeで `chrome://extensions/` を開く
+5. 「デベロッパーモード」を有効にする
+6. 「パッケージ化されていない拡張機能を読み込む」をクリック
+7. `quick-link-jump/quick-link-jump` フォルダを選択
 
-## 使用方法
+## 使い方
 
-### 1. アクションの登録
+### アクションの登録
 
-1. 拡張機能のアイコンをクリックして設定ページを開く
-2. 「アクション名」と「URLテンプレート」を入力
-3. 「アクションを追加」をクリック
+1. 拡張機能のアイコンをクリックし、設定ページを開く
+2. 「アクション名」と「URLテンプレート」を入力し、「アクションを追加」をクリック
+   - `{selText}` が選択テキストに置き換わります
+   - テキスト未選択でも空のままリンクを開けます
 
-### 2. 使用例
+#### 設定例
 
-| アクション名 | URLテンプレート | 説明 |
-|------------|----------------|------|
-| Jira Issue | `https://jira.example.com/browse/PROJECT-{selText}` | JiraのIssueを開く |
-| GitHub Issue | `https://github.com/org/repo/issues/{selText}` | GitHubのIssueを開く |
-| GitHub PR | `https://github.com/org/repo/pull/{selText}` | GitHubのPRを開く |
-| Google検索 | `https://www.google.com/search?q={selText}` | Googleで検索 |
+| アクション名 | URLテンプレート                                     | 説明                |
+| ------------ | --------------------------------------------------- | ------------------- |
+| Jira Issue   | `https://jira.example.com/browse/PROJECT-{selText}` | JiraのIssueを開く   |
+| GitHub Issue | `https://github.com/org/repo/issues/{selText}`      | GitHubのIssueを開く |
+| GitHub PR    | `https://github.com/org/repo/pull/{selText}`        | GitHubのPRを開く    |
+| Google検索   | `https://www.google.com/search?q={selText}`         | Googleで検索        |
 
-**制限事項:**
-- アクション名は40文字以内
-- 登録可能なアクション数は100個まで
-- http/httpsのURLのみ対応
+### アクションの利用
 
-### 3. 使用方法
+1. ウェブページ上で対象テキスト（例：チケット番号など）を選択します。
+2. 右クリックして「Quick Link Jump」のサブメニューを開きます。
+3. 登録したアクション名をクリックします。
+4. 新規タブでリンクが開きます。
 
-1. ウェブページでIssue番号やPR番号などのテキストを選択（空でも可）
-2. 右クリックしてコンテキストメニューを開く
-3. 登録したアクション名をクリック
-4. 新規タブでリンクが開く
-
-**注意:** テキストを選択しなくても、空の状態でリンクを開くことができます
-
-## ファイル構成
-
-```
-quick-link-jump/
-├── manifest.json      # 拡張機能の設定ファイル
-├── background.js      # Service Worker（バックグラウンド処理）
-├── options.html       # 設定ページ
-├── options.js         # 設定ページのJavaScript
-├── README.md          # このファイル
-└── 指示書.md          # 開発指示書
-```
-
-## 技術仕様
+## 技術構成・特徴
 
 - **Manifest V3**対応
-- **Service Worker**使用
+- **React + Emotion**によるUI実装
+- **Service Worker**利用
 - **chrome.storage.sync**でデータ同期
 - **chrome.contextMenus**でコンテキストメニュー
 - **chrome.tabs**でタブ操作
-- アクションの並び替え機能
 - HTMLエスケープ処理によるXSS対策
-
-## セキュリティ
-
+- 選択テキストは `encodeURIComponent` でエンコード
 - http/httpsのURLのみ対応
-- 選択テキストは `encodeURIComponent` でエンコードされます
-- アクション名はHTMLエスケープ処理でXSS対策
 
 ## トラブルシューティング
 
@@ -90,14 +74,11 @@ quick-link-jump/
 
 ## 開発者向け
 
-### ローカル開発
-1. ファイルを編集
-2. `chrome://extensions/` で「更新」ボタンをクリック
-3. 変更が反映されます
+1. `npm install` を実行し、依存パッケージをインストール
+2. `npm run dev` でwatchモードビルド
+3. Chromeで `chrome://extensions/` を開き「更新」ボタンで反映
 
-### デバッグ
-- 拡張機能の「詳細」→「Service Worker を検査」でログを確認
-- 設定ページは通常のウェブページとしてデバッグ可能
+詳細は `docs/developer.md` も参照してください。
 
 ## ライセンス
 
